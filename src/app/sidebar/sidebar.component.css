@@ -1,0 +1,33 @@
+.canvas {
+    width: 400px;
+    height: 400px;
+}
+
+.sidebar {
+    width: 400px;
+    flex-grow: 1;
+    align-items: stretch;
+    background-color: #404040;
+}
+
+#flexbox {
+    width: fit-content;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: gray;
+}
+
+button {
+    flex-grow: 1;
+    padding: 0;
+    height: 18px;
+}
+
+p {
+    display: inline;
+}
+
+.row {
+    display: flex;
+}
