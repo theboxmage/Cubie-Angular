@@ -60,7 +60,7 @@ export class Cubie {
 
   rotateY(direction: number)
   {
-    direction == 1 ? this.colors.rotateX() : this.colors.rotateXPrime();
+    direction != 1 ? this.colors.rotateX() : this.colors.rotateXPrime();
   }
   
   rotateZ(direction: number)

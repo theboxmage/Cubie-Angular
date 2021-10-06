@@ -25,23 +25,39 @@ export class CanvasComponent implements OnInit {
       case 'R\'':
         this.turnX(1, -1)
         break;
+      case 'r':
+        this.turnX(1, 1);
+        this.turnX(0, 1);
+        break;
+      case 'r\'':
+        this.turnX(1, -1);
+        this.turnX(0, -1);
+        break;
       case 'L':
         this.turnX(-1, -1);
         break;
       case 'L\'':
         this.turnX(-1, 1);
         break;
-      case 'U':
-        this.turnY(-1, 1);
+      case 'l':
+        this.turnX(-1, -1);
+        this.turnX(0, -1);
         break;
-      case 'U\'':
+      case 'l\'':
+        this.turnX(-1, 1);
+        this.turnX(0, 1);
+        break;
+      case 'U':
         this.turnY(-1, -1);
         break;
+      case 'U\'':
+        this.turnY(-1, 1);
+        break;
       case 'D':
-        this.turnY(1, -1);
+        this.turnY(1, 1);
         break;
       case 'D\'':
-        this.turnY(1, 1);
+        this.turnY(1, -1);
         break;
       case 'F':
         this.turnZ(1, 1);
@@ -79,7 +95,6 @@ export class CanvasComponent implements OnInit {
       if (temp.y == row) {
         let xPrime = Math.round(temp.x * Math.cos(a) + temp.z * Math.sin(a));
         let zPrime = Math.round((-1 * temp.x) * Math.sin(a) + temp.z * Math.cos(a));
-
         temp.x = xPrime;
         temp.z = zPrime;
         this.cubes[i].rotateY(direction);
@@ -88,8 +103,14 @@ export class CanvasComponent implements OnInit {
   }
 
   turnZ(row: number, direction: number) {
+    let a = this.angle * direction;
     for (let i = 0; i < 27; i++) {
+      let temp = this.cubes[i].pos;
       if (this.cubes[i].pos.z == row) {
+        let xPrime = Math.round(temp.x * Math.cos(a) - temp.y * Math.sin(a));
+        let yPrime = Math.round(temp.x * Math.sin(a) + temp.y * Math.cos(a));
+        temp.x = xPrime;
+        temp.y = yPrime;
         this.cubes[i].rotateZ(direction);
       }
     }
