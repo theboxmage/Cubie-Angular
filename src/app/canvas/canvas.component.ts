@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Cubie } from './Cubie';
-import { Cube } from './Cube';
+import {Component, OnInit} from '@angular/core';
+import {Cube} from './Cube';
 import * as p5 from 'p5';
-import { TurnService } from '../turn.service';
+import {TurnService} from '../turn.service';
+
 @Component({
   selector: 'cube-canvas',
   templateUrl: './canvas.component.html',
@@ -11,26 +11,28 @@ import { TurnService } from '../turn.service';
 
 export class CanvasComponent implements OnInit {
   cube!: Cube;
+
   constructor(private turnService: TurnService) {
     turnService.turnSource$.subscribe(
-      turn => { this.cube.loadAlg(turn) }
+      turn => {
+        this.cube.loadAlg(turn)
+      }
     )
   }
 
 
   ngOnInit(): void {
-    const sketch = (s: p5) => {
-      s.setup = () => {
-        let canvas = s.createCanvas(400, 400, s.WEBGL);
-        let count = 0;
-        this.cube = new Cube(s, 50, this.turnService);
+    const sketch = (canvas_: p5) => {
+      canvas_.setup = () => {
+        let canvas = canvas_.createCanvas(400, 400, canvas_.WEBGL);
+        this.cube = new Cube(canvas_, 50, this.turnService);
         canvas.parent('sketch-holder');
       };
 
-      s.draw = () => {
-        canvas.rotateX(s.PI / -10)
-        canvas.rotateY(s.PI / -6)
-        s.clear();
+      canvas_.draw = () => {
+        canvas.rotateX(canvas_.PI / -10)
+        canvas.rotateY(canvas_.PI / -6)
+        canvas_.clear();
         this.cube.show();
       };
     }
