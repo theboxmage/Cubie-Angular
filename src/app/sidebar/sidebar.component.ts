@@ -8,21 +8,13 @@ import { TurnService } from '../turn.service';
   providers: [TurnService]
 })
 export class SidebarComponent {
-  @Output() voted = new EventEmitter<boolean>();
-  didVote = false;
   constructor(private turnService: TurnService)
   {
     this.turnService = turnService;
-  }
-
-  vote(agreed: boolean) {
-    this.voted.emit(agreed);
-    this.didVote = true;
   }
 
   confirm(turn: string)
   {
     this.turnService.announceTurn(turn);
   }
-
 }
