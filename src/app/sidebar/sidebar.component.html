@@ -1,44 +1,14 @@
 <div id="flexbox">
-    <div class="canvas">
-        <cube-canvas></cube-canvas>
+  <div class="canvas">
+    <cube-canvas></cube-canvas>
+  </div>
+  <div class="sidebar">
+    <mat-slider min="1" max="5" step="0.5" value="1.5"></mat-slider>
+    <div class="row">
+      <button *ngFor="let char of options" (click)="confirm(char)">{{char}}</button>
     </div>
-    <div class="sidebar">
-        <mat-slider min="1" max="5" step="0.5" value="1.5"></mat-slider>
-        <div class="row">
-            <button class="column" (click)="confirm(&quot;L&quot;)" id="Lbutton">L</button>
-            <button class="column" (click)="confirm(&quot;R&quot;)" id="Rbutton">R</button>
-            <button class="column" (click)="confirm(&quot;U&quot;)" id="Ubutton">U</button>
-            <button class="column" (click)="confirm(&quot;D&quot;)" id="Dbutton">D</button>
-            <button class="column" (click)="confirm(&quot;F&quot;)" id="Fbutton">F</button>
-            <button class="column" (click)="confirm(&quot;B&quot;)" id="Bbutton">B</button>
-            <button class="column" (click)="confirm(&quot;l&quot;)" id="lbutton">l</button>
-            <button class="column" (click)="confirm(&quot;r&quot;)" id="rbutton">r</button>
-            <button class="column" (click)="confirm(&quot;u&quot;)" id="ubutton">u</button>
-            <button class="column" (click)="confirm(&quot;d&quot;)" id="dbutton">d</button>
-            <button class="column" (click)="confirm(&quot;f&quot;)" id="fbutton">f</button>
-            <button class="column" (click)="confirm(&quot;b&quot;)" id="bbutton">b</button>
-            <button class="column" (click)="confirm(&quot;M&quot;)" id="Mbutton">M</button>
-            <button class="column" (click)="confirm(&quot;x&quot;)" id="xbutton">x</button>
-            <button class="column" (click)="confirm(&quot;y&quot;)" id="ybutton">y</button>
-            <button class="column" (click)="confirm(&quot;z&quot;)" id="zbutton">z</button>
-        </div>
-        <div class="row">
-            <button class="column" (click)="confirm(&quot;L'&quot;)" id="Lbutton">L'</button>
-            <button class="column" (click)="confirm(&quot;R'&quot;)" id="Rbutton">R'</button>
-            <button class="column" (click)="confirm(&quot;U'&quot;)" id="Ubutton">U'</button>
-            <button class="column" (click)="confirm(&quot;D'&quot;)" id="Dbutton">D'</button>
-            <button class="column" (click)="confirm(&quot;F'&quot;)" id="Fbutton">F'</button>
-            <button class="column" (click)="confirm(&quot;B'&quot;)" id="Bbutton">B'</button>
-            <button class="column" (click)="confirm(&quot;l'&quot;)" id="lbutton">l'</button>
-            <button class="column" (click)="confirm(&quot;r'&quot;)" id="rbutton">r'</button>
-            <button class="column" (click)="confirm(&quot;u'&quot;)" id="ubutton">u'</button>
-            <button class="column" (click)="confirm(&quot;d'&quot;)" id="dbutton">d'</button>
-            <button class="column" (click)="confirm(&quot;f'&quot;)" id="fbutton">f'</button>
-            <button class="column" (click)="confirm(&quot;b'&quot;)" id="bbutton">b'</button>
-            <button class="column" (click)="confirm(&quot;M'&quot;)" id="Mbutton">M'</button>
-            <button class="column" (click)="confirm(&quot;x'&quot;)" id="xbutton">x'</button>
-            <button class="column" (click)="confirm(&quot;y'&quot;)" id="ybutton">y'</button>
-            <button class="column" (click)="confirm(&quot;z'&quot;)" id="zbutton">z'</button>
-        </div>
+    <div class="row">
+      <button *ngFor="let char of options" (click)="confirm(char + '\'')">{{char}}'</button>
     </div>
+  </div>
 </div>
