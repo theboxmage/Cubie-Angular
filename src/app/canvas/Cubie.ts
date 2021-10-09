@@ -3,16 +3,12 @@ import { Colors } from './Colors'
 export class Cubie {
   pos!: p5.Vector;
   rot!: p5.Vector;
-  len: number;
   colors: Colors;
-  canvas: p5;
   a: number;
 
-  constructor(x: number, y: number, z: number, len_: number, c: p5) {
-    this.canvas = c;
-    this.pos = c.createVector(x, y, z);
-    this.rot = c.createVector(0, 0, 0);
-    this.len = len_;
+  constructor(x: number, y: number, z: number, private len: number, private canvas: p5) {
+    this.pos = canvas.createVector(x, y, z);
+    this.rot = canvas.createVector(0, 0, 0);
     this.colors = new Colors();
     this.a = Math.PI / 2;
   }
