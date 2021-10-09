@@ -2,10 +2,6 @@ import { Cubie } from './Cubie';
 let animationInterval: number = -1;
 export class AnimationService{
 
-    constructor(){
-
-    }
-
     turnX(index = [1], dir = 1, cubes: Cubie[])
     {
         animationInterval = setInterval(this.animateX, 20, index, dir, cubes)
