@@ -1,17 +1,16 @@
 import * as p5 from "p5";
+import { TurnService } from "../turn.service";
 import { AnimationService } from "./animationService";
 import { Cubie } from './Cubie';
 export class Cube {
     animationService: AnimationService;
+    queue: string[];
     angle = (Math.PI / 2);
     cubes: Cubie[];
-    width: number;
-    canvas: p5;
-    constructor(canvas: p5, width: number) {
-        this.width = width;
-        this.canvas = canvas;
+    constructor(private canvas: p5, private width: number, private turnService: TurnService) {
         this.cubes = new Array(27);
-        this.animationService = new AnimationService();
+        this.animationService = new AnimationService(this.cubes, this.turnService);
+        this.queue = [];
         let count: number = 0;
         for (let x = -1; x <= 1; x++) {
             for (let y = -1; y <= 1; y++) {
@@ -21,6 +20,10 @@ export class Cube {
                 }
             }
         }
+        turnService.animationFinished$.subscribe( () => {
+            this.queue.shift();
+            this.stepAlg();
+        });
     }
 
     show() {
@@ -29,85 +32,101 @@ export class Cube {
         }
     }
 
+    loadAlg(turn: string) {
+        this.queue.push(turn);
+        if(this.queue.length == 1)
+        {
+            this.stepAlg();
+        }
+    }
+
+    stepAlg() {
+        let nextStep = this.queue[0];
+        if(nextStep)
+        {
+            this.applyTurn(nextStep);
+        }
+    }
+
     applyTurn(turn: string) {
         switch (turn) {
             case 'R':
-                this.animationService.turnX([1], 1, this.cubes);
+                this.animationService.turnX([1], 1);
                 break;
             case 'R\'':
-                this.animationService.turnX([1], -1, this.cubes);
+                this.animationService.turnX([1], -1);
                 break;
             case 'r':
-                this.animationService.turnX([0, 1], 1, this.cubes);
+                this.animationService.turnX([0, 1], 1);
                 break;
             case 'r\'':
-                this.animationService.turnX([0, 1], -1, this.cubes);
+                this.animationService.turnX([0, 1], -1);
                 break;
             case 'L':
-                this.animationService.turnX([-1], -1, this.cubes);
+                this.animationService.turnX([-1], -1);
                 break;
             case 'L\'':
-                this.animationService.turnX([-1], 1, this.cubes);
+                this.animationService.turnX([-1], 1);
                 break;
             case 'l':
-                this.animationService.turnX([0, -1], -1, this.cubes);
+                this.animationService.turnX([0, -1], -1);
                 break;
             case 'l\'':
-                this.animationService.turnX([0, -1], 1, this.cubes);
+                this.animationService.turnX([0, -1], 1);
                 break;
             case 'U':
-                this.animationService.turnY([-1], -1, this.cubes);
+                this.animationService.turnY([-1], -1);
                 break;
             case 'U\'':
-                this.animationService.turnY([-1], 1, this.cubes);
+                this.animationService.turnY([-1], 1);
                 break;
             case 'u':
-                this.animationService.turnY([0, -1], -1, this.cubes);
+                this.animationService.turnY([0, -1], -1);
                 break;
             case 'u\'':
-                this.animationService.turnY([0, -1], 1, this.cubes);
+                this.animationService.turnY([0, -1], 1);
                 break;
             case 'D':
-                this.animationService.turnY([1], 1, this.cubes);
+                this.animationService.turnY([1], 1);
                 break;
             case 'D\'':
-                this.animationService.turnY([1], -1, this.cubes);
+                this.animationService.turnY([1], -1);
                 break;
             case 'd':
-                this.animationService.turnY([0, 1], 1, this.cubes);
+                this.animationService.turnY([0, 1], 1);
                 break;
             case 'd\'':
-                this.animationService.turnY([0, 1], -1, this.cubes);
+                this.animationService.turnY([0, 1], -1);
                 break;
             case 'F':
-                this.animationService.turnZ([1], 1, this.cubes);
+                this.animationService.turnZ([1], 1);
                 break;
             case 'F\'':
-                this.animationService.turnZ([1], -1, this.cubes);
+                this.animationService.turnZ([1], -1);
                 break;
             case 'f':
-                this.animationService.turnZ([0,1], 1, this.cubes);
+                this.animationService.turnZ([0, 1], 1);
                 break;
             case 'f\'':
-                this.animationService.turnZ([0,1], -1, this.cubes);
+                this.animationService.turnZ([0, 1], -1);
                 break;
             case 'B':
-                this.animationService.turnZ([-1], -1, this.cubes);
+                this.animationService.turnZ([-1], -1);
                 break;
             case 'B\'':
-                this.animationService.turnZ([-1], 1, this.cubes);
+                this.animationService.turnZ([-1], 1);
                 break;
             case 'b':
-                this.animationService.turnZ([0,-1], -1, this.cubes);
+                this.animationService.turnZ([0, -1], -1);
                 break;
             case 'b\'':
-                this.animationService.turnZ([0,-1], 1, this.cubes);
+                this.animationService.turnZ([0, -1], 1);
                 break;
             case 'M':
-                this.animationService.turnX([0], -1, this.cubes);
+                this.animationService.turnX([0], -1);
                 break;
             case 'M\'':
-                this.animationService.turnX([0], 1, this.cubes);
+                this.animationService.turnX([0], 1);
                 break;
         }
     }

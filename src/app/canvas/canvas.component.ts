@@ -13,7 +13,7 @@ export class CanvasComponent implements OnInit {
   cube!: Cube;
   constructor(private turnService: TurnService) {
     turnService.turnSource$.subscribe(
-      turn => { this.cube.applyTurn(turn) }
+      turn => { this.cube.loadAlg(turn) }
     )
   }
 
@@ -23,7 +23,7 @@ export class CanvasComponent implements OnInit {
       s.setup = () => {
         let canvas = s.createCanvas(400, 400, s.WEBGL);
         let count = 0;
-        this.cube = new Cube(s, 50);
+        this.cube = new Cube(s, 50, this.turnService);
         canvas.parent('sketch-holder');
       };
 

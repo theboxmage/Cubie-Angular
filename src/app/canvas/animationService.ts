@@ -1,19 +1,31 @@
 import { Cubie } from './Cubie';
+import { TurnService } from '../turn.service';
 let animationInterval: number = -1;
-export class AnimationService{
+export class AnimationService {
 
-    turnX(index = [1], dir = 1, cubes: Cubie[])
-    {
-        animationInterval = setInterval(this.animateX, 20, index, dir, cubes)
+    constructor(private cubes: Cubie[], private turnService: TurnService) {
+        //stub?
     }
 
-    animateX(index: number[], dir: number, cubes: Cubie[]) {
+    turnX(index = [1], dir = 1) {
+        animationInterval = setInterval(this.animateX.bind(this), 20, index, dir)
+    }
+
+    turnY(index = [1], dir = 1) {
+        animationInterval = setInterval(this.animateY.bind(this), 20, index, dir)
+    }
+
+    turnZ(index = [1], dir = 1) {
+        animationInterval = setInterval(this.animateZ.bind(this), 20, index, dir)
+    }
+
+    animateX(index: number[], dir: number) {
         let endPoint = false;
         for (let i = 0; i < 27; i++) {
-            if (index.includes(Math.round(cubes[i].pos.x))) {
-                cubes[i].rot.x += dir * Math.PI / 30;
+            if (index.includes(Math.round(this.cubes[i].pos.x))) {
+                this.cubes[i].rot.x += dir * Math.PI / 30;
             }
-            if (Math.abs(cubes[i].rot.x) > Math.PI / 2) {
+            if (Math.abs(this.cubes[i].rot.x) > Math.PI / 2) {
                 endPoint = true;
             }
         }
@@ -21,26 +33,22 @@ export class AnimationService{
             clearInterval(animationInterval);
             animationInterval = -1;
             for (let i = 0; i < 27; i++) {
-                if (index.includes(Math.round(cubes[i].pos.x))) {
-                    cubes[i].rot.x = 0;
-                    cubes[i].rotateX(dir);
+                if (index.includes(Math.round(this.cubes[i].pos.x))) {
+                    this.cubes[i].rot.x = 0;
+                    this.cubes[i].rotateX(dir);
                 }
             }
+            this.turnService.finishAnimation();
         }
     }
 
-    turnY(index = [1], dir = 1, cubes: Cubie[])
-    {
-        animationInterval = setInterval(this.animateY, 20, index, dir, cubes)
-    }
-    
-    animateY(index: number[], dir: number, cubes: Cubie[]) {
+    animateY(index: number[], dir: number) {
         let endPoint = false;
         for (let i = 0; i < 27; i++) {
-            if (index.includes(Math.round(cubes[i].pos.y))) {
-                cubes[i].rot.y += dir * Math.PI / 30;
+            if (index.includes(Math.round(this.cubes[i].pos.y))) {
+                this.cubes[i].rot.y += dir * Math.PI / 30;
             }
-            if (Math.abs(cubes[i].rot.y) > Math.PI / 2) {
+            if (Math.abs(this.cubes[i].rot.y) > Math.PI / 2) {
                 endPoint = true;
             }
         }
@@ -48,26 +56,22 @@ export class AnimationService{
             clearInterval(animationInterval);
             animationInterval = -1;
             for (let i = 0; i < 27; i++) {
-                if (index.includes(Math.round(cubes[i].pos.y))) {
-                    cubes[i].rot.y = 0;
-                    cubes[i].rotateY(dir);
+                if (index.includes(Math.round(this.cubes[i].pos.y))) {
+                    this.cubes[i].rot.y = 0;
+                    this.cubes[i].rotateY(dir);
                 }
             }
+            this.turnService.finishAnimation();
         }
     }
 
-    turnZ(index = [1], dir = 1, cubes: Cubie[])
-    {
-        animationInterval = setInterval(this.animateZ, 20, index, dir, cubes)
-    }
-
-    animateZ(index: number[], dir: number, cubes: Cubie[]) {
+    animateZ(index: number[], dir: number) {
         let endPoint = false;
         for (let i = 0; i < 27; i++) {
-            if (index.includes(Math.round(cubes[i].pos.z))) {
-                cubes[i].rot.z += dir * Math.PI / 30;
+            if (index.includes(Math.round(this.cubes[i].pos.z))) {
+                this.cubes[i].rot.z += dir * Math.PI / 30;
             }
-            if (Math.abs(cubes[i].rot.z) > Math.PI / 2) {
+            if (Math.abs(this.cubes[i].rot.z) > Math.PI / 2) {
                 endPoint = true;
             }
         }
@@ -75,11 +79,12 @@ export class AnimationService{
             clearInterval(animationInterval);
             animationInterval = -1;
             for (let i = 0; i < 27; i++) {
-                if (index.includes(Math.round(cubes[i].pos.z))) {
-                    cubes[i].rot.z = 0;
-                    cubes[i].rotateZ(dir);
+                if (index.includes(Math.round(this.cubes[i].pos.z))) {
+                    this.cubes[i].rot.z = 0;
+                    this.cubes[i].rotateZ(dir);
                 }
             }
+            this.turnService.finishAnimation();
         }
     }
 }
