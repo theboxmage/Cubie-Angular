@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { MatSliderModule } from '@angular/material/slider';
 import { TurnService } from '../turn.service';
 @Component({
   selector: 'sidebar',
