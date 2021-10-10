@@ -20,7 +20,6 @@ export class Cubie {
     this.canvas.rotateY(this.rot.y);
     this.canvas.rotateZ(this.rot.z);
     this.canvas.translate(this.len * this.pos.x, this.len * this.pos.y, this.len * this.pos.z);
-    this.canvas.fill("#F00");
     this.canvas.stroke(0);
     this.canvas.strokeWeight(4);
 
