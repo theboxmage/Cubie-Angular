@@ -2,10 +2,10 @@ import {Cubie} from './Cubie';
 import {TurnService} from '../turn.service';
 import {FormControl} from "@angular/forms";
 
-let animationInterval: number = -1;
 
 export class AnimationService {
   speed: number;
+  animationInterval: number = -1;
   constructor(private cubes: Cubie[], private turnService: TurnService, control:  FormControl) {
     this.speed = control.value;
     control.valueChanges.subscribe(speed => {
@@ -14,15 +14,15 @@ export class AnimationService {
   }
 
   turnX(index = [1], dir = 1) {
-    animationInterval = setInterval(this.animateX.bind(this), 20, index, dir)
+    this.animationInterval = setInterval(this.animateX.bind(this), 20, index, dir)
   }
 
   turnY(index = [1], dir = 1) {
-    animationInterval = setInterval(this.animateY.bind(this), 20, index, dir)
+    this.animationInterval = setInterval(this.animateY.bind(this), 20, index, dir)
   }
 
   turnZ(index = [1], dir = 1) {
-    animationInterval = setInterval(this.animateZ.bind(this), 20, index, dir)
+    this.animationInterval = setInterval(this.animateZ.bind(this), 20, index, dir)
   }
 
   animateX(index: number[], dir: number) {
@@ -36,8 +36,8 @@ export class AnimationService {
       }
     }
     if (endPoint) {
-      clearInterval(animationInterval);
-      animationInterval = -1;
+      clearInterval(this.animationInterval);
+      this.animationInterval = -1;
       for (let i = 0; i < 27; i++) {
         if (index.includes(Math.round(this.cubes[i].pos.x))) {
           this.cubes[i].rot.x = 0;
@@ -59,8 +59,8 @@ export class AnimationService {
       }
     }
     if (endPoint) {
-      clearInterval(animationInterval);
-      animationInterval = -1;
+      clearInterval(this.animationInterval);
+      this.animationInterval = -1;
       for (let i = 0; i < 27; i++) {
         if (index.includes(Math.round(this.cubes[i].pos.y))) {
           this.cubes[i].rot.y = 0;
@@ -82,8 +82,8 @@ export class AnimationService {
       }
     }
     if (endPoint) {
-      clearInterval(animationInterval);
-      animationInterval = -1;
+      clearInterval(this.animationInterval);
+      this.animationInterval = -1;
       for (let i = 0; i < 27; i++) {
         if (index.includes(Math.round(this.cubes[i].pos.z))) {
           this.cubes[i].rot.z = 0;

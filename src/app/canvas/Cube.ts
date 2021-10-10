@@ -37,7 +37,7 @@ export class Cube {
 
   loadAlg(turn: string) {
     this.queue.push(turn);
-    if (this.queue.length == 1) {
+    if (this.animationService.animationInterval == -1) {
       this.stepAlg();
     }
   }
