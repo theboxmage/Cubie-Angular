@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { TurnService } from '../turn.service';
+import {Component} from '@angular/core';
+import {TurnService} from '../turn.service';
+import {FormControl} from "@angular/forms";
 
 @Component({
   selector: 'sidebar',
@@ -9,13 +10,13 @@ import { TurnService } from '../turn.service';
 })
 export class SidebarComponent {
   options: Array<string> = ["L", "R", "U", "D", "F", "B", "l", "r", "u", "d", "f", "b", "M", "x", "y", "z"];
-  constructor(private turnService: TurnService)
-  {
+  sliderValue = new FormControl(50);
+
+  constructor(private turnService: TurnService) {
     this.turnService = turnService;
   }
 
-  confirm(turn: string)
-  {
+  confirm(turn: string) {
     this.turnService.announceTurn(turn);
   }
 }

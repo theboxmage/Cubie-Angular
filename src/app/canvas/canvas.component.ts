@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Cube} from './Cube';
 import * as p5 from 'p5';
 import {TurnService} from '../turn.service';
+import {FormControl} from "@angular/forms";
 
 @Component({
   selector: 'cube-canvas',
@@ -11,13 +12,12 @@ import {TurnService} from '../turn.service';
 
 export class CanvasComponent implements OnInit {
   cube!: Cube;
-
+  @Input() control!: FormControl;
   constructor(private turnService: TurnService) {
     turnService.turnSource$.subscribe(
       turn => {
         this.cube.loadAlg(turn)
-      }
-    )
+      });
   }
 
 
@@ -25,7 +25,7 @@ export class CanvasComponent implements OnInit {
     const sketch = (canvas_: p5) => {
       canvas_.setup = () => {
         let canvas = canvas_.createCanvas(400, 400, canvas_.WEBGL);
-        this.cube = new Cube(canvas_, 50, this.turnService);
+        this.cube = new Cube(canvas_, 50, this.turnService, this.control);
         canvas.parent('sketch-holder');
       };
 

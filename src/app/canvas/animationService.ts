@@ -1,12 +1,16 @@
 import {Cubie} from './Cubie';
 import {TurnService} from '../turn.service';
+import {FormControl} from "@angular/forms";
 
 let animationInterval: number = -1;
 
 export class AnimationService {
-
-  constructor(private cubes: Cubie[], private turnService: TurnService) {
-    //stub?
+  speed: number;
+  constructor(private cubes: Cubie[], private turnService: TurnService, control:  FormControl) {
+    this.speed = control.value;
+    control.valueChanges.subscribe(speed => {
+      this.speed = speed;
+    });
   }
 
   turnX(index = [1], dir = 1) {
@@ -25,7 +29,7 @@ export class AnimationService {
     let endPoint = false;
     for (let i = 0; i < 27; i++) {
       if (index.includes(Math.round(this.cubes[i].pos.x))) {
-        this.cubes[i].rot.x += dir * Math.PI / 30;
+        this.cubes[i].rot.x += dir * Math.PI / this.speed;
       }
       if (Math.abs(this.cubes[i].rot.x) > Math.PI / 2) {
         endPoint = true;
@@ -48,7 +52,7 @@ export class AnimationService {
     let endPoint = false;
     for (let i = 0; i < 27; i++) {
       if (index.includes(Math.round(this.cubes[i].pos.y))) {
-        this.cubes[i].rot.y += dir * Math.PI / 30;
+        this.cubes[i].rot.y += dir * Math.PI / this.speed;
       }
       if (Math.abs(this.cubes[i].rot.y) > Math.PI / 2) {
         endPoint = true;
@@ -71,7 +75,7 @@ export class AnimationService {
     let endPoint = false;
     for (let i = 0; i < 27; i++) {
       if (index.includes(Math.round(this.cubes[i].pos.z))) {
-        this.cubes[i].rot.z += dir * Math.PI / 30;
+        this.cubes[i].rot.z += dir * Math.PI / this.speed;
       }
       if (Math.abs(this.cubes[i].rot.z) > Math.PI / 2) {
         endPoint = true;

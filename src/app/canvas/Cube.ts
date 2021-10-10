@@ -2,6 +2,7 @@ import * as p5 from "p5";
 import {TurnService} from "../turn.service";
 import {AnimationService} from "./animationService";
 import {Cubie} from './Cubie';
+import {FormControl} from "@angular/forms";
 
 export class Cube {
   animationService: AnimationService;
@@ -9,9 +10,9 @@ export class Cube {
   angle = (Math.PI / 2);
   cubes: Cubie[];
 
-  constructor(private canvas: p5, private width: number, private turnService: TurnService) {
+  constructor(private canvas: p5, private width: number, private turnService: TurnService, control: FormControl) {
     this.cubes = new Array(27);
-    this.animationService = new AnimationService(this.cubes, this.turnService);
+    this.animationService = new AnimationService(this.cubes, this.turnService, control);
     this.queue = [];
     let count: number = 0;
     for (let x = -1; x <= 1; x++) {

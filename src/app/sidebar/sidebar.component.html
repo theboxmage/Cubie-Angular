@@ -1,9 +1,9 @@
 <div id="flexbox">
   <div class="canvas">
-    <cube-canvas></cube-canvas>
+    <cube-canvas [control]="sliderValue"></cube-canvas>
   </div>
   <div class="sidebar">
-    <mat-slider min="1" max="5" step="0.5" value="1.5"></mat-slider>
+    <mat-slider [formControl]="sliderValue" min="1" max="100" step="5" value="30"></mat-slider>
     <div class="row">
       <button *ngFor="let char of options" (click)="confirm(char)">{{char}}</button>
     </div>
