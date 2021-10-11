@@ -5,7 +5,8 @@ import {AppComponent} from './app.component';
 import {SidebarComponent} from './sidebar/sidebar.component';
 import {CanvasComponent} from './canvas/canvas.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {MatInputModule} from "@angular/material/input";
 
 @NgModule({
   declarations: [
@@ -17,7 +18,9 @@ import {ReactiveFormsModule} from "@angular/forms";
     BrowserModule,
     BrowserAnimationsModule,
     MatSliderModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatInputModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

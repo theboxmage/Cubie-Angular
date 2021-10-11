@@ -5,6 +5,10 @@
   <div class="sidebar">
     <mat-slider [formControl]="sliderValue" min="1" max="100" step="5" value="30"></mat-slider>
     <div class="row">
+      <input [(ngModel)]="algText" name="algText" class="input"/>
+      <button (click)="loadAlg()" class="loadBtn">Load</button>
+    </div>
+    <div class="row">
       <button *ngFor="let char of options" (click)="confirm(char)">{{char}}</button>
     </div>
     <div class="row">

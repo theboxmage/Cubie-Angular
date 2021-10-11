@@ -14,6 +14,35 @@ mat-slider {
     width: 100%;
 }
 
+input {
+  flex-grow: 2;
+}
+
+.loadBtn,
+.input{
+  display: inline-block;
+  font-size: 20px;
+  border: 1px solid black;
+  -webkit-appearance: none;
+}
+
+.input {
+  border: 1px solid lightgray;
+}
+
+.loadBtn{
+  background-color: #ccc;
+  border: 1px solid transparent;
+  padding-bottom: 2px;
+  height:100%;
+  transition: 0.3s;
+  opacity: 0.7;
+}
+
+.loadBtn:hover{
+  opacity: 1;
+}
+
 #flexbox {
     width: fit-content;
     height: 100vh;
