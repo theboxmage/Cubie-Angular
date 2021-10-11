@@ -10,6 +10,7 @@ import {MatInputModule} from "@angular/material/input";
 import { OllListComponent } from './oll-list/oll-list.component';
 import { PllListComponent } from './pll-list/pll-list.component';
 import { RouterModule } from '@angular/router';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { RouterModule } from '@angular/router';
     SidebarComponent,
     CanvasComponent,
     OllListComponent,
-    PllListComponent
+    PllListComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -27,6 +29,7 @@ import { RouterModule } from '@angular/router';
     MatInputModule,
     FormsModule,
     RouterModule.forRoot([
+      {path: '', component:HomeComponent},
       {path: 'pll-list', component: PllListComponent},
       {path: 'oll-list', component:OllListComponent}
     ])
