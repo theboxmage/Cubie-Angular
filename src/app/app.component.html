@@ -1,4 +1,12 @@
 <div id="container">
-    <sidebar></sidebar>
-    <div id="test"></div>
+  <sidebar></sidebar>
+  <div class="flex">
+    <nav>
+      <a class="button" routerLink="/oll-list">OLL Cheaatsheet</a> |
+      <a class="button" routerLink="/pll-list">PLL Cheaatsheet</a>
+    </nav>
+    <div id="test">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
 </div>

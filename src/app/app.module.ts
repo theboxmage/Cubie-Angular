@@ -7,12 +7,17 @@ import {CanvasComponent} from './canvas/canvas.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatInputModule} from "@angular/material/input";
+import { OllListComponent } from './oll-list/oll-list.component';
+import { PllListComponent } from './pll-list/pll-list.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
     AppComponent,
     SidebarComponent,
-    CanvasComponent
+    CanvasComponent,
+    OllListComponent,
+    PllListComponent
   ],
   imports: [
     BrowserModule,
@@ -20,7 +25,11 @@ import {MatInputModule} from "@angular/material/input";
     MatSliderModule,
     ReactiveFormsModule,
     MatInputModule,
-    FormsModule
+    FormsModule,
+    RouterModule.forRoot([
+      {path: 'pll-list', component: PllListComponent},
+      {path: 'oll-list', component:OllListComponent}
+    ])
   ],
   providers: [],
   bootstrap: [AppComponent]
