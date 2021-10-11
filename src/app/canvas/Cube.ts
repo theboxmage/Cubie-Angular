@@ -129,6 +129,24 @@ export class Cube {
       case 'M\'':
         this.animationService.turnX([0], 1);
         break;
+      case 'x':
+        this.animationService.turnX([-1, 0, 1], 1);
+        break;
+      case 'y':
+        this.animationService.turnY([-1, 0, 1], -1);
+        break;
+      case 'z':
+        this.animationService.turnZ([-1, 0, 1], 1);
+        break;
+      case 'x\'':
+        this.animationService.turnX([-1, 0, 1], -1);
+        break;
+      case 'y\'':
+        this.animationService.turnY([-1, 0, 1], 1);
+        break;
+      case 'z\'':
+        this.animationService.turnZ([-1, 0, 1], -1);
+        break;
     }
   }
 }
